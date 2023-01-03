@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import classes from "./Email.module.css";
 
 const Email = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passValue, setPassValue] = useState("");
   const [loggedIn, setLoggedIn] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const emailChangeHandler = (e) => {
     setEmailValue(e.target.value);
@@ -22,9 +25,50 @@ const Email = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const data = { email: emailValue, password: passValue };
+    // const data = { email: emailValue, password: passValue };
 
-    console.log(data);
+    // console.log(data);
+
+    setLoading(true);
+
+    let url;
+    if (loggedIn) {
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAR98eAk6HbwlskmhhhIV8UlLJSdh_qXaU";
+    } else {
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAR98eAk6HbwlskmhhhIV8UlLJSdh_qXaU";
+    }
+
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        email: emailValue,
+        password: passValue,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      setLoading(false);
+      if (res.ok) {
+        navigate("/home");
+        console.log(res.json);
+        return res.json;
+      } else {
+        return res.json().then((data) => {
+          //show an error modal
+          let errorMessage = "Authentication Failed";
+          if (data && data.error && data.error.message) {
+            errorMessage = data.error.message;
+          }
+          console.log(errorMessage);
+          alert(errorMessage);
+          throw new Error(errorMessage);
+        });
+      }
+    });
 
     setEmailValue("");
     setPassValue("");
@@ -53,7 +97,10 @@ const Email = () => {
           />
         </div>
 
-        <button type="submit">{loggedIn ? "Login" : "Signup"}</button>
+        {!loading && (
+          <button type="submit">{loggedIn ? "Login" : "Signup"}</button>
+        )}
+        {loading && <button>Loading...</button>}
         {loggedIn && (
           <p>
             Are you a new User?{" "}
