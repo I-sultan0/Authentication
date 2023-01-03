@@ -39,7 +39,7 @@ button {
   }
 }
 
-.login-with-google-btn {
+.googleBtn {
   transition: background-color 0.3s, box-shadow 0.3s;
   padding: 12px 16px 12px 42px;
   border: none;
@@ -55,18 +55,18 @@ button {
   background-repeat: no-repeat;
   background-position: 12px 11px;
 }
-.login-with-google-btn:hover {
+.googleBtn:hover {
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
 }
-.login-with-google-btn:active {
+.googleBtn:active {
   background-color: #eeeeee;
 }
-.login-with-google-btn:focus {
+.googleBtn:focus {
   outline: none;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
     0 0 0 3px #c8dafc;
 }
-.login-with-google-btn:disabled {
+.googleBtn:disabled {
   filter: grayscale(100%);
   background-color: #ebebeb;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);

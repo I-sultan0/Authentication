@@ -1,19 +1,23 @@
-import "./App.css";
-import { signInWithGoogle } from "./Firebase";
-const profileImg = localStorage.getItem("profilePic");
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Google from "./Components/Google/Google";
+import Navbar from "./Components/Navbar/Navbar";
+import Home from "./Components/Home/Home";
+import Email from "./Components/Email/Email";
 
-function App() {
-  console.log(profileImg);
+const App = () => {
   return (
-    <div className="App">
-      <button className="login-with-google-btn" onClick={signInWithGoogle}>
-        Sign in with Google
-      </button>
-      <h1>{localStorage.getItem("name")}</h1>
-      <h1>{localStorage.getItem("email")}</h1>
-      <img src={profileImg} alt="Profile" />
+    <div>
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/google" element={<Google />} />
+          <Route path="/email" element={<Email />} />
+        </Routes>
+      </main>
     </div>
   );
-}
+};
 
 export default App;
