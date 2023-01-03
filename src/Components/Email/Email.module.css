@@ -1,0 +1,26 @@
+.emailDiv {
+  border: 1px solid black;
+  text-align: center;
+  align-items: center;
+  margin: 10% auto;
+  width: 40%;
+  border-radius: 12px;
+}
+.emailDiv input {
+  margin-top: 2rem;
+  padding: 0.6rem;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+.emailDiv button {
+  border: 1px solid white;
+  background-color: #55cd;
+  color: white;
+  padding: 0.6rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+}
+.span {
+  color: blue;
+  cursor: pointer;
+}
